@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AV Shoes Point</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background-color: #f8f8f8; color: #333; }
+
+    header {
+      background: #111; color: #ffffff3e;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 50px;
+      flex-wrap: wrap;
+    }
+    header h1 { font-size: 1.8em; }
+    nav a {
+      color: #fff; margin: 0 10px; text-decoration: none;
+      transition: color .3s;
+    }
+    nav a:hover { color: #ff6600; }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1528701800489-20be3c2a121d?auto=format&fit=crop&w=1500&q=80') center/cover;
+      height: 60vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      color: #fff; text-shadow: 2px 2px 5px #000;
+    }
+    .hero h2 { font-size: 3em; margin-bottom: 10px; }
+    .hero button {
+      background: #ff6600; border: none; color: white;
+      padding: 10px 25px; font-size: 1.1em;
+      border-radius: 5px; cursor: pointer;
+      transition: background .3s;
+    }
+    .hero button:hover { background: #e65c00; }
+
+    h2.section-title {
+      text-align: center; margin-top: 40px; font-size: 2em; color: #222;
+    }
+
+    .products {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px; padding: 40px;
+    }
+    .product {
+      background: #fff; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform .3s;
+    }
+    .product:hover { transform: translateY(-5px); }
+    .product img { width: 100%; height: 220px; object-fit: cover; }
+    .product-info { padding: 15px; text-align: center; }
+    .product-info h3 { margin-bottom: 5px; }
+    .product-info p { color: #777; margin-bottom: 15px; }
+    .product-info button {
+      background: #111; color: white; border: none;
+      padding: 10px 20px; border-radius: 5px;
+      cursor: pointer; transition: background .3s;
+    }
+    .product-info button:hover { background: #ff6600; }
+
+    footer {
+      background: #111; color: #fff; text-align: center;
+      padding: 20px; margin-top: 40px;
+    }
+
+    /* Cart Modal */
+    #cartModal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); display: none;
+      justify-content: center; align-items: center;
+    }
+    #cartModal .cart-box {
+      background: white; padding: 30px; border-radius: 10px;
+      width: 90%; max-width: 500px;
+    }
+    #cartItems li { margin: 10px 0; }
+    #closeCart {
+      background: #ff6600; border: none; color: white;
+      padding: 10px 15px; border-radius: 5px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AV Shoes Point</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#mens">Men</a>
+      <a href="#womens">Women</a>
+      <a href="#kids">Kids</a>
+      <a href="#" id="viewCart">Cart 🛒</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Walk in Style & Comfort</h2>
+    <p>Discover the latest footwear collections for everyone!</p>
+    <button onclick="scrollToProducts()">Shop Now</button>
+  </section>
+
+  <!-- Men’s Collection -->
+  <h2 class="section-title" id="mens">Men’s Collection</h2>
+  <section class="products">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80" alt="Sneakers">
+      <div class="product-info">
+        <h3>Classic Sneakers</h3><p>$45</p>
+        <button onclick="addToCart('Classic Sneakers', 45)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.IzbLfSmAB6r4cEE37Oz6swHaHa?pid=Api&P=0&h=180" alt="Leather Boots">
+      <div class="product-info">
+        <h3>Leather Boots</h3><p>$85</p>
+        <button onclick="addToCart('Leather Boots', 85)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- FIXED IMAGE -->
+    <div class="product">
+      <img src="https://sp.yimg.com/ib/th?id=OPAC.7j4y8bIlt8haQA474C474&o=5&pid=21.1&w=160&h=105" alt="Formal Shoes">
+      <div class="product-info">
+        <h3>Formal Oxford Shoes</h3><p>$70</p>
+        <button onclick="addToCart('Formal Oxford Shoes', 70)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://sp.yimg.com/ib/th?id=OPAC.V0Eaohk78gPygw474C474&o=5&pid=21.1&w=160&h=105" alt="Running Shoes">
+      <div class="product-info">
+        <h3>Running Trainers</h3><p>$60</p>
+        <button onclick="addToCart('Running Trainers', 60)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Women’s Collection -->
+  <h2 class="section-title" id="womens">Women’s Collection</h2>
+  <section class="products">
+    
+    <!-- FIXED EMPTY IMAGE -->
+    <div class="product">
+      <img src="https://sp.yimg.com/ib/th?id=OPAC.j65itq8GaQfl7A474C474&o=5&pid=21.1&w=160&h=105" alt="Sports Shoes">
+      <div class="product-info">
+        <h3>Sporty Runners</h3><p>$55</p>
+        <button onclick="addToCart('Sporty Runners', 55)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.qpjwrrVY0aX1jYnA3kN9SAHaE7?pid=Api&P=0&h=180" alt="Flats">
+      <div class="product-info">
+        <h3>Stylish Flats</h3><p>$35</p>
+        <button onclick="addToCart('Stylish Flats', 35)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.D4PpptAnL8aUGtKnqRb69wHaHa?pid=Api&P=0&h=180" alt="Heels">
+      <div class="product-info">
+        <h3>Elegant Heels</h3><p>$65</p>
+        <button onclick="addToCart('Elegant Heels', 65)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.-AuQDkbetZaq_KIdP1YHnQHaHa?pid=Api&P=0&h=180" alt="Sandals">
+      <div class="product-info">
+        <h3>Comfy Sandals</h3><p>$40</p>
+        <button onclick="addToCart('Comfy Sandals', 40)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kids Collection -->
+  <h2 class="section-title" id="kids">Kids Collection</h2>
+  <section class="products">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=800&q=80" alt="Kids Sneakers">
+      <div class="product-info">
+        <h3>Kids Sneakers</h3><p>$30</p>
+        <button onclick="addToCart('Kids Sneakers', 30)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.yJnrRU5ImGP-EsVlipalOwHaEK?pid=Api&P=0&h=180" alt="Kids Sandals">
+      <div class="product-info">
+        <h3>Colorful Sandals</h3><p>$25</p>
+        <button onclick="addToCart('Colorful Sandals', 25)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.IzQU46h-41m7GaIScK2qrQHaFq?pid=Api&P=0&h=180" alt="Kids Boots">
+      <div class="product-info">
+        <h3>Mini Boots</h3><p>$35</p>
+        <button onclick="addToCart('Mini Boots', 35)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.6NzT9hRY5n1u785ZGf3uDwHaFV?pid=Api&P=0&h=180" alt="Kids Runners">
+      <div class="product-info">
+        <h3>Playground Runners</h3><p>$28</p>
+        <button onclick="addToCart('Playground Runners', 28)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 AV Shoes Point. All rights reserved.</p>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div id="cartModal">
+    <div class="cart-box">
+      <h2>Your Cart</h2>
+      <ul id="cartItems"></ul>
+      <h3>Total: $<span id="cartTotal">0</span></h3>
+      <button id="closeCart">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const cart = [];
+    const cartModal = document.getElementById('cartModal');
+    const cartItemsList = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const viewCartBtn = document.getElementById('viewCart');
+    const closeCartBtn = document.getElementById('closeCart');
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      alert(`${name} added to cart!`);
+    }
+
+    function updateCartDisplay() {
+      cartItemsList.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price;
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - $${item.price}`;
+        cartItemsList.appendChild(li);
+      });
+      cartTotal.textContent = total.toFixed(2);
+    }
+
+    viewCartBtn.addEventListener('click', () => {
+      updateCartDisplay();
+      cartModal.style.display = 'flex';
+    });
+
+    closeCartBtn.addEventListener('click', () => {
+      cartModal.style.display = 'none';
+    });
+
+    function scrollToProducts() {
+      document.getElementById('mens').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
